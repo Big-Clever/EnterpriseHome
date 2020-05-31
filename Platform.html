@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>缪文锴</title>
+    <link rel="short icon" href="Resource/icon.png">
+    <!--stylesheet用来增强外部样式-->
+    <link rel="stylesheet" href="ExternalStyle.css">
+
+    <style>
+        article{
+            margin: 20px;
+        }
+
+        h3{
+            color:red;
+            font-size: 18px;
+            border-bottom:1px solid #dddddd;
+            padding-bottom: 10px;
+        }
+
+        h4{
+            font-size: 14px;
+        }
+
+        article p{
+            font-size: 12px;
+            text-indent: 2em;
+            line-height: 2em;
+        }
+    </style>
+</head>
+<body>
+<!--第一部分-->
+<!--语义化标签：增强代码可读性-->
+<header class="DS_header">
+    <span>平台风采</span>
+</header>
+
+<!--第二部分-->
+<section class="DS_second_section">
+    <img src="Resource/banner4.png" alt="请检查你的网络！">
+</section>
+
+<!--第三部分-->
+<article>
+    <h3 id="title"></h3>
+    <h4 id="subTitle"></h4>
+    <p id="info"></p>
+
+
+    <script>
+        //第一步：创建一个请求对象（负责去服务端要数据）
+        var xhr = new XMLHttpRequest();
+
+        //第二步：建立与服务端的连接（找到哪个服务器去要数据）
+        xhr.open("get","https://mockapi.eolinker.com/2ZhGVxjacb39010e6753bd9c02ee803e6e3bfeab6e8007c/aboutus");
+
+        //设置头信息，告诉服务器让数据以表单的形式传递过去
+        xhr.setRequestHeader("content-type","application/x-www-form-urlencoded")
+
+        //第三步：向服务端发送请求
+        xhr.send();
+
+        //第四步：接收服务端返回数据
+        xhr.onreadystatechange = function (ev) {
+            //xhr.readyState == 4 代表数据请求完成
+            //xhr.status == 200   代表数据返回成功
+            if (xhr.readyState == 4 && xhr.status == 200){
+                var responseData = JSON.parse(xhr.responseText);
+
+                var obj = responseData.data;
+
+                var h3 = document.getElementById("title");
+                var h4 = document.getElementById("subTitle");
+                var p = document.getElementById("info");
+
+                h3.innerHTML = obj.title;
+                h4.innerHTML = obj.subTitle;
+                p.innerHTML = obj.info;
+
+            }
+        }
+
+    </script>
+
+</article>
+
+<!--第四部分-->
+<footer>
+    <a href="DropletService.html">
+        <img src="Resource/nav10.png">
+        <span>小滴服务</span>
+    </a>
+
+    <a href="BusinessProject.html">
+        <img src="Resource/nav20.png">
+        <span>企业项目</span>
+    </a>
+
+    <a href="ServiceProcess.html">
+        <img src="Resource/nav30.png">
+        <span>服务流程</span>
+    </a>
+
+    <a href="">
+        <img src="Resource/nav41.png">
+        <span style="color: red">平台风采</span>
+    </a>
+
+    <a href="MyDroplet.html">
+        <img src="Resource/nav50.png">
+        <span>我的小滴</span>
+    </a>
+</footer>
+
+</body>
+</html>
